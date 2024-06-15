@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem da Sorte</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #4B0082;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+        .card-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #8A2BE2;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .envelope::before, .envelope::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-color: #6A0DAD;
+            top: 0;
+            left: 50%;
+            border-radius: 0 0 50% 50%;
+            transition: transform 1s;
+        }
+        .envelope::before {
+            transform: rotate(-45deg) translate(-50%, -50%);
+        }
+        .envelope::after {
+            transform: rotate(45deg) translate(-50%, -50%);
+        }
+        .envelope.open::before {
+            transform: rotate(-45deg) translate(-50%, -150%);
+        }
+        .envelope.open::after {
+            transform: rotate(45deg) translate(-50%, -150%);
+        }
+        .stars-hearts {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            display: flex;
+            gap: 5px;
+        }
+        .star, .heart {
+            color: yellow;
+            font-size: 24px;
+        }
+        .heart {
+            color: red;
+        }
+        .button {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #9932CC;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #BA55D3;
+        }
+        .message-container {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #8A2BE2;
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 2s forwards;
+        }
+        .message {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .twinkling-stars {
+            display: flex;
+            gap: 5px;
+        }
+        .twinkling-star {
+            color: yellow;
+            font-size: 24px;
+            animation: twinkle 1.5s infinite alternate;
+        }
+        .twinkling-star:nth-child(2) { animation-delay: 0.2s; }
+        .twinkling-star:nth-child(3) { animation-delay: 0.4s; }
+        .twinkling-star:nth-child(4) { animation-delay: 0.6s; }
+        .twinkling-star:nth-child(5) { animation-delay: 0.8s; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes twinkle {
+            from { opacity: 0.5; transform: scale(1); }
+            to { opacity: 1; transform: scale(1.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="envelope" id="envelope">
+            <div class="stars-hearts">
+                <span class="star">★</span>
+                <span class="heart">♥</span>
+                <span class="star">★</span>
+                <span class="heart">♥</span>
+                <span class="star">★</span>
+            </div>
+            <button class="button" onclick="openEnvelope()">Abrir Carta</button>
+        </div>
+        <div class="message-container" id="messageContainer">
+            <div class="message">
+                니콜리, 행운을 빌어요!
+            </div>
+            <div class="twinkling-stars">
+                <span class="twinkling-star">★</span>
+                <span class="twinkling-star">★</span>
+                <span class="twinkling-star">★</span>
+                <span class="twinkling-star">★</span>
+                <span class="twinkling-star">★</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const messageContainer = document.getElementById('messageContainer');
+
+            envelope.classList.add('open');
+            
+            setTimeout(() => {
+                envelope.style.display = 'none';
+                messageContainer.style.display = 'flex';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
